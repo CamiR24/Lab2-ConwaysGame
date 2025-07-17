@@ -1,66 +1,35 @@
 mod framebuffer;
-mod line;
 
 use raylib::prelude::*;
 use framebuffer::FrameBuffer;
-use crate::line::line;
-
-use std::thread;
-use std::time::Duration;
 
 fn main() {
     let window_width = 800;
-    let window_height = 600;
+    let window_height = 800;
 
-    let framebuffer_width = 800;
-    let framebuffer_height = 600;
+    let framebuffer_width = 150;
+    let framebuffer_height = 150;
 
-    let (mut window, raylib_thread) = raylib::init()
-        .size(window_width, window_height)
-        .title("Window 1")
-        .log_level(TraceLogLevel::LOG_WARNING)
+    let cell_size_x = window_width / framebuffer_width;
+    let cell_size_y = window_height / framebuffer_height;
+
+    let (mut window, thread) = raylib::init()
+        .size(window_width as i32, window_height as i32)
+        .title("Conway's Game of Life")
         .build();
 
-    let mut framebuffer = FrameBuffer::new(framebuffer_width as u32, framebuffer_height as u32, Color::WHITE);
+    window.set_target_fps(10);
 
-    framebuffer.set_background_color(Color::new(255, 255, 255, 255));
-
-    let mut translate_x = 0.0;
-    let mut translate_y = 0.0;
-
+    let mut framebuffer = FrameBuffer::new(framebuffer_width, framebuffer_height, Color::BLACK);
+    framebuffer.set_initial_pattern();
 
     while !window.window_should_close() {
-        translate_x += 1.0;
-        translate_y += 1.0;
+        framebuffer.step();
 
-        framebuffer.clear();
-
-        render(&mut framebuffer, translate_x, translate_y);
-
-        framebuffer.swap_buffers(&mut window, &raylib_thread);
-
-        thread::sleep(Duration::from_millis(16));
-
+        let mut d = window.begin_drawing(&thread);
+        d.clear_background(Color::BLACK);
+        
+        // Usar la función render
+        framebuffer.render(&mut d, cell_size_x, cell_size_y);
     }
-
-    fn render(
-        framebuffer: &mut FrameBuffer,
-        translate_x: f32,
-        translate_y: f32,
-    ) {
-        framebuffer.set_current_color(Color::SKYBLUE);
-        line(
-            framebuffer,
-            Vector2::new(50.0 + translate_x, 50.0 + translate_y),
-            Vector2::new(350.0 + translate_x, 350.0 + translate_y),
-        );
-
-        framebuffer.set_current_color(Color::SKYBLUE);
-        line(
-            framebuffer,
-            Vector2::new(350.0 + translate_x, 50.0 + translate_y),
-            Vector2::new(50.0 + translate_x, 350.0 + translate_y),
-        );
-    }
-
 }
