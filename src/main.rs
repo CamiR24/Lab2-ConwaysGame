@@ -2,6 +2,7 @@ mod framebuffer;
 
 use raylib::prelude::*;
 use framebuffer::FrameBuffer;
+use std::fs::create_dir_all;
 
 fn main() {
     let window_width = 400;
@@ -20,16 +21,27 @@ fn main() {
 
     window.set_target_fps(10);
 
+    create_dir_all("frames").expect("No se pudo crear la carpeta de frames");
+
     let mut framebuffer = FrameBuffer::new(framebuffer_width, framebuffer_height, Color::BLACK);
     framebuffer.set_initial_pattern();
 
-    while !window.window_should_close() {
+    let mut frame_count = 0;
+    let max_frames = 100;
+
+    while !window.window_should_close() && frame_count < max_frames {
         framebuffer.step();
 
-        let mut d = window.begin_drawing(&thread);
-        d.clear_background(Color::BLACK);
-        
-        // Usar la función render
-        framebuffer.render(&mut d, cell_size_x, cell_size_y);
+        {
+            // bloque para liberar d antes del screenshot
+            let mut d = window.begin_drawing(&thread);
+            d.clear_background(Color::BLACK);
+            framebuffer.render(&mut d, cell_size_x, cell_size_y);
+        } // `d` se libera aquí
+
+        let filename = format!("frames/frame_{:04}.png", frame_count);
+        window.take_screenshot(&thread, &filename);
+
+        frame_count += 1;
     }
 }

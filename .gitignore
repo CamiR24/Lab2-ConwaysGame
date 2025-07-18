@@ -1,6 +1,7 @@
 /target
 Cargo.toml
 Cargo.lock
+/frames
 
 # Added by cargo
 #
