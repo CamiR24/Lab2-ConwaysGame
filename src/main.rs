@@ -4,11 +4,11 @@ use raylib::prelude::*;
 use framebuffer::FrameBuffer;
 
 fn main() {
-    let window_width = 800;
-    let window_height = 800;
+    let window_width = 400;
+    let window_height = 400;
 
-    let framebuffer_width = 150;
-    let framebuffer_height = 150;
+    let framebuffer_width = 100;
+    let framebuffer_height = 100;
 
     let cell_size_x = window_width / framebuffer_width;
     let cell_size_y = window_height / framebuffer_height;

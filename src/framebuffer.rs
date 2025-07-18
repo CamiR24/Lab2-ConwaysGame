@@ -104,7 +104,6 @@ impl FrameBuffer {
         }
     }
     
-    //definición de patrones iniciales
     pub fn set_glider(&mut self, start_x: usize, start_y: usize) {
         let pattern = vec![
             (1, 0), (2, 1), (0, 2), (1, 2), (2, 2)
@@ -150,7 +149,6 @@ impl FrameBuffer {
     }
     
     pub fn set_lwss(&mut self, start_x: usize, start_y: usize) {
-        // Lightweight Spaceship
         let pattern = vec![
             (0, 1), (3, 1),
             (4, 2),
@@ -165,6 +163,7 @@ impl FrameBuffer {
     
     pub fn set_pulsar(&mut self, start_x: usize, start_y: usize) {
         let pattern = vec![
+
             (2, 0), (3, 0), (4, 0), (8, 0), (9, 0), (10, 0),
             
             (0, 2), (5, 2), (7, 2), (12, 2),
@@ -187,95 +186,72 @@ impl FrameBuffer {
         }
     }
     
-    pub fn set_pentadecathlon(&mut self, start_x: usize, start_y: usize) {
-        let pattern = vec![
-            (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0),
-            (0, 1), (9, 1),
-            (0, 2), (9, 2),
-            (1, 3), (8, 3),
-            (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4),
-        ];
-        
-        for (x, y) in pattern {
-            self.point(start_x + x, start_y + y, Color::WHITE);
-        }
-    }
-    
-    pub fn set_gosper_glider_gun(&mut self, start_x: usize, start_y: usize) {
-        let pattern = vec![
-            (24, 0),
-            (22, 1), (24, 1),
-            (12, 2), (13, 2), (20, 2), (21, 2), (34, 2), (35, 2),
-            (11, 3), (15, 3), (20, 3), (21, 3), (34, 3), (35, 3),
-            (0, 4), (1, 4), (10, 4), (16, 4), (20, 4), (21, 4),
-            (0, 5), (1, 5), (10, 5), (14, 5), (16, 5), (17, 5), (22, 5), (24, 5),
-            (10, 6), (16, 6), (24, 6),
-            (11, 7), (15, 7),
-            (12, 8), (13, 8)
-        ];
-        
-        for (x, y) in pattern {
-            self.point(start_x + x, start_y + y, Color::WHITE);
-        }
-    }
-    
-    pub fn set_diehard(&mut self, start_x: usize, start_y: usize) {
-        let pattern = vec![
-            (6, 0),
-            (0, 1), (1, 1),
-            (1, 2), (5, 2), (6, 2), (7, 2)
-        ];
-        
-        for (x, y) in pattern {
-            self.point(start_x + x, start_y + y, Color::WHITE);
-        }
-    }
-    
-    pub fn set_acorn(&mut self, start_x: usize, start_y: usize) {
-        let pattern = vec![
-            (1, 0),
-            (3, 1),
-            (0, 2), (1, 2), (4, 2), (5, 2), (6, 2)
-        ];
-        
-        for (x, y) in pattern {
-            self.point(start_x + x, start_y + y, Color::WHITE);
-        }
-    }
-
-    //llamar patrones iniciales
     pub fn set_initial_pattern(&mut self) {
         self.clear();
         
-        self.set_glider(10, 10);
-        self.set_glider(20, 20);
+        self.set_glider(0, 30);
+        self.set_glider(10, 30);
+        self.set_glider(20, 30);
         self.set_glider(30, 30);
-        
-        self.set_blinker(50, 10);
+        self.set_glider(40, 30);
+        self.set_glider(50, 30);
+        self.set_glider(60, 30);
+        self.set_glider(70, 30);
+        self.set_glider(80, 30);
+        self.set_glider(90, 30);
+
+        self.set_blinker(0, 15);
+        self.set_blinker(20, 15);
+        self.set_blinker(40, 15);
+        self.set_blinker(60, 15);
+        self.set_blinker(80, 15);
+        self.set_blinker(10, 15);
+        self.set_blinker(30, 15);
         self.set_blinker(50, 15);
-        self.set_blinker(50, 20);
+        self.set_blinker(70, 15);
+        self.set_blinker(90, 15);
         
+        self.set_toad(0, 10);
+        self.set_toad(20, 10);
+        self.set_toad(40, 10);
+        self.set_toad(60, 10);
+        self.set_toad(80, 10);
+        self.set_toad(10, 10);
+        self.set_toad(30, 10);
+        self.set_toad(50, 10);
         self.set_toad(70, 10);
+        self.set_toad(90, 10);
+
+        self.set_beacon(0, 20);
+        self.set_beacon(20, 20);
+        self.set_beacon(40, 20);
+        self.set_beacon(60, 20);
+        self.set_beacon(80, 20);
+        self.set_beacon(10, 20);
+        self.set_beacon(30, 20);
+        self.set_beacon(50, 20);
         self.set_beacon(70, 20);
+        self.set_beacon(90, 20);
         
-        self.set_lwss(10, 50);
-        self.set_lwss(20, 60);
+        self.set_lwss(20, 80);
         
+        self.set_pulsar(0, 40);
+        self.set_pulsar(20, 40);
         self.set_pulsar(40, 40);
+        self.set_pulsar(60, 40);
+        self.set_pulsar(80, 40);
+
+        self.set_pulsar(0, 60);
+        self.set_pulsar(20, 60);
+        self.set_pulsar(40, 60);
+        self.set_pulsar(60, 60);
+        self.set_pulsar(80, 60);
+
+        self.set_pulsar(0, 80);
+        self.set_pulsar(20, 80);
+        self.set_pulsar(40, 80);
+        self.set_pulsar(60, 80);
+        self.set_pulsar(80, 80);
         
-        self.set_pentadecathlon(10, 80);
-        
-        //agregar el Gosper Glider Gun si hay espacio
-        if self.width > 80 && self.height > 80 {
-            self.set_gosper_glider_gun(5, 5);
-        }
-        
-        self.set_diehard(80, 10);
-        self.set_acorn(80, 80);
-        
-        //patrones aleatorios
-        for i in 0..10 {
-            self.set_glider(i * 8, 90);
-        }
     }
 }
