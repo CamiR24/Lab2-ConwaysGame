@@ -33,11 +33,11 @@ fn main() {
         framebuffer.step();
 
         {
-            // bloque para liberar d antes del screenshot
+
             let mut d = window.begin_drawing(&thread);
             d.clear_background(Color::BLACK);
             framebuffer.render(&mut d, cell_size_x, cell_size_y);
-        } // `d` se libera aquí
+        } 
 
         let filename = format!("frames/frame_{:04}.png", frame_count);
         window.take_screenshot(&thread, &filename);

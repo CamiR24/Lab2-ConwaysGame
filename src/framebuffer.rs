@@ -74,7 +74,7 @@ impl FrameBuffer {
                     continue;
                 }
                 
-                // Wraparound para los bordes
+                //bordes
                 let nx = ((x as i32 + dx).rem_euclid(self.width as i32)) as usize;
                 let ny = ((y as i32 + dy).rem_euclid(self.height as i32)) as usize;
                 
